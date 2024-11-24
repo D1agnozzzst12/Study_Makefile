@@ -1,46 +1,93 @@
-thing_wrong := *.o # Don't do this! '*' will not get expanded
-thing_right := $(wildcard *.o)
+# blah: blah.o 
+# 	cc blah.o -o blah  
 
-all: one two three four
+# blah.o: blah.c 
+# 	cc -c blah.c -o blah.o
 
-# Fails, because $(thing_wrong) is the string "*.o"
-one: $(thing_wrong)
+# blah.c: 
+# 	echo "int main() { return 0; } > blah.c" 
 
-# Stays as *.o if there are no files that match this pattern :(
-two: *.o 
+# clean:
+# 	rm blah *.o
 
-# Works as you would expect! In this case, it does nothing.
-three: $(thing_right)
 
-# Same as rule three
-four: $(wildcard *.o)thing_wrong := *.o # Don't do this! '*' will not get expanded
-thing_right := $(wildcard *.o)
 
-all: one two three four
+# some_file: other_file
+# 	echo "This will always run, and runs second"
+# 	touch some_file
 
-# Fails, because $(thing_wrong) is the string "*.o"
-one: $(thing_wrong)
+# other_file: 
+# 	echo "This will always run, and runs first"
 
-# Stays as *.o if there are no files that match this pattern :(
-two: *.o 
 
-# Works as you would expect! In this case, it does nothing.
-three: $(thing_right)
+# some_file:
+# 	touch some_file
 
-# Same as rule three
-four: $(wildcard *.o)thing_wrong := *.o # Don't do this! '*' will not get expanded
-thing_right := $(wildcard *.o)
+# clean: 
+# 	rm -f some_file
 
-all: one two three four
 
-# Fails, because $(thing_wrong) is the string "*.o"
-one: $(thing_wrong)
+# files:= file1 file2
 
-# Stays as *.o if there are no files that match this pattern :(
-two: *.o 
+# some_file: ${files}
+# 	echo "Look at this variable: " ${files}
 
-# Works as you would expect! In this case, it does nothing.
-three: $(thing_right)
+# file1: 
+# 	touch file1
+# file2: 
+# 	touch file2
 
-# Same as rule three
-four: $(wildcard *.o)
+# clean: 
+# 	rm -f file1 file2 some_file
+
+
+
+# a := one two#a is set to the string "one two"
+# b := 'one two' #Not recommended. b is set to the string "'one two'"
+
+# all:
+# 	printf '$a'
+# 	printf $b
+
+
+
+# Ссылаются на переменные, используя либо ${}, либо $()
+
+# x := dude
+
+# all:
+# 	echo $(x)
+# 	echo ${x}
+
+# # Bad practice, but works
+# 	echo $x
+
+
+
+# all: one two three
+
+# one: 
+# 	touch one
+# two:
+# 	touch two
+# three:
+# 	touch three
+
+# clean:
+# 	rm -f one two three
+
+
+
+
+hello:
+	@echo "Hello"
+
+
+
+
+
+
+
+
+
+
